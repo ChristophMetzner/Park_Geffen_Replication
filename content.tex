@@ -1,29 +1,22 @@
-
-
 \subsection{Introduction}
-\begin{itemize}
- \item 
-  'Brain stimulation is increasingly used in clinical settings'
- \item
-  stimulation protocols not optimized
- \item
-  link control theory and brain modelling to predict the effect of stimulation 
- \item
-  FitzHugh Nagumo vs Wilson-Cowan
-\end{itemize}
 
-Transcranial electrical and magnetic stimulation  (TES and TMS, respectively) have been increasingly used in clinical studies over the last decades. TES
-for example has been used to enhance memory consolidation by boosting slow-wave oscillations in deep sleep \cite{}, and to ...insert another prominent example...
-\cite{}.
 
-Furthermore, deep brain stimulation (DBS) has shown remarkable results in the treatment of tremor symptoms in Parkinsons diesease \cite{} and also great potential 
-in the treatment of psychiatric disorder such as obsessive-compulsive disorder \cite{}.
-
+Transcranial electrical and magnetic stimulation  (TES and TMS, respectively) have been increasingly used in studies over the last decades and have been found to
+alter and enhance cognitive processes
+\supercite{Walsh2000,Lage2016,Paulus2016}. Furthermore, deep brain stimulation (DBS) has shown remarkable results in the treatment of tremor symptoms in 
+Parkinsons disease \supercite{Collomb-Clerc2015} and also great potential 
+in the treatment of psychiatric disorder such as obsessive-compulsive disorder \supercite{Alonso2015}.
 However, despite this growing success in clinical settings, a principled understanding of the effects of stimulation on the dynamical processes in the brain 
-is still lacking. 
+is still lacking and, hence, stimulation parameters and target areas are currently not being optimized in a systematic fashion.    
 
+Therefore, Muldoon et al. \supercite{Muldoon2016} develop a framework to explore the effects of targeted transcranial or deep brain stimulation on overall 
+brain dynamics. In their framework they use data-driven computational model based on subject-specific structural connectivity and a nonlinear model of regional
+brain activity (the so-called Wilson-Cowan model \supercite{Wilson1972}). Furthermore, they demonstrate that structure-based measures from linear network control theory 
+can predict the functional effect of targeted stimulation.
 
-
+In this work, we present an implementation of the modelling framework from Muldoon et al. \supercite{Muldoon2016} writtem im pure Python, where we exchanged
+the model of regional brain activity to a faster, phenomenological model, the FitzHugh Nagumo model \supercite{FitzHugh1961}. We report a \textit{partial/full(?)} 
+replication of their results.
 \subsection{Methods}
 
 Briefly recapitulate 
@@ -60,7 +53,7 @@ Briefly recapitulate
   Replicate Figure 6 (?)
 \end{itemize}
 
-I don't think we need to repicate Figure 7 (Structure-function landscape)
+I don't think we need to replicate Figure 7 (Structure-function landscape)
 
 \subsection{Reimplementation}
 
