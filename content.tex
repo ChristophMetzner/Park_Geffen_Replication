@@ -50,7 +50,7 @@ regional brain dynamics. In the original article, Muldoon et al. \supercite{Muld
 describes the interaction between a local excitatory and a local inhibitory neural population by two coupled differential equations. However, due to the different
 parameters describing the coupling of the populations and the synaptic interactions, the Wilson-Cowan model has more then ten free parameters and, thus,
 a high degree of unconstrained variability. Therefore, we opted to exchange the Wilson-Cowan model by the FitzHugh Nagumo (FHN) model \supercite{FitzHugh1961}, which
-only has four (\textit{correct?}\textbf{\textit{Nico!}}) free parameters and, additionally, is computationally slightly more efficient than the Wilson-Cowan model.
+only has six (\textit{correct?}\textbf{\textit{Nico!}}) free parameters and, additionally, is computationally slightly more efficient than the Wilson-Cowan model.
 
 The FHN is given by...\textit{  FHN equations and parameters (plus explanation)} \textbf{\textit{Nico!}}
 
@@ -67,19 +67,72 @@ regime and, last, for even stronger inputs it then settles into a stable fixed p
 
 
 \paragraph{Individual oscillatory transition paramters}
+\textbf{\textit{Nico!}}
 
-
-\paragraph{Inter- and intra-subject reproducibility and variability}
-\textit{depends on whether we have repeated scans of same individuals or not}
+%\paragraph{Inter- and intra-subject reproducibility and variability}
+%\textit{depends on whether we have repeated scans of same individuals or not}
 
 
 \paragraph{Linear network control theory}
-
+Muldoon et al. \supercite{Muldoon2016} utilize the control theoretic notion of controllability to get theoretical insight inot the effect stimulation might have.
+They choose two different measures based on a linear control setting: \textit{average controllability} and \textit{modal controllability}. Average controllability 
+is given by the average input energy to the control nodes over all possible target states. Typically, nodes with high average controllability can control networks 
+dynamics over nearby target states in an energy efficient way. On the other modal controllability decribes how well a node can control all network modes. High modal 
+controllability means that such a node is able to reach all modes of a network and, thus, can force the dynamics into hard-to-reach target states.
 
 \paragraph{Functional and structural effect, and fractional activation}
-
+We calculate functional connectivity matrices as pairwise cross-correlation between the $x_1$ components of the FHN model of each node. Throughout, we 
+use a 1s time window. As in the original article, the stimulation trials consist of three phases each comprising 1s: the first phase, without any external input, 
+allows the model to stabilise its activity, the second phase, again without external input, is used as a baseline and, lastly, in the third phase the stimulation
+is applied, i.e. the external input parameter of a single node $i$ is set to $I_i(t)=0.52?$ \textbf{\textit{Nico}} while all others remain 0. 
 
 \subsection{Reproduction of experiments}
+
+
+
+
+\paragraph{Regional controllability}
+
+
+
+\begin{figure}
+\subfigure[]{
+\includegraphics[width=\textwidth]{Figures/average_controllability}}
+\subfigure[]{
+\includegraphics[width=\textwidth]{Figures/modal_controllability}}
+ \caption{\textbf{Regional controllability.} (a) Relationship between node degree  and (a) average controllability and (b) modal controllability, respectively, 
+ for all regions and subjects.\textit{replicates Figure 3}} 
+ \label{fig:controllability-measures}
+\end{figure}
+
+
+\begin{figure}
+\subfigure[]{
+\includegraphics[width=0.8\textwidth]{Figures/DeltaFC25}}
+\subfigure[]{
+\includegraphics[width=0.8\textwidth]{Figures/DeltaFC70}}
+ \caption{\textbf{Effect of regional stimulation.} Effect of stimulation of two example regions: (a) Region 25 (name?) with a low average controllability (value?),
+ (b) Region 70 (name?) with a high average controllability (value?). \textit{replicates Figure 4c}} 
+ \label{fig:functional-effect-examples}
+\end{figure}
+
+
+\begin{figure}
+\subfigure[]{
+\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
+\subfigure[]{
+\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}\\
+\subfigure[]{
+\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
+\subfigure[]{
+\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
+ \caption{\textbf{Functional effect and controllability.} (a-b) Functional effect of nodal stimulation plotted against average (a) and modal (b) controllability.
+ \textit{replicates Figure 5; change b-d; redo all figures with individual subject resolution }\textbf{\textit{Question: Why do we have modal controllability 
+ ranging from 0.4 to 1 while Muldoon from 0.965 to 1?}}} 
+ \label{fig:controllability-functional-effect}
+\end{figure}
+
+
 
 \begin{itemize}
  \item 
@@ -87,19 +140,16 @@ regime and, last, for even stronger inputs it then settles into a stable fixed p
   and for c) our box plots for all subjects, and d) bar plots with our data
   
  \item
-  Replicate Figure 3 
-
- \item
-  Replicate Figure 4 c) 
+  Replicate Figure 5 b)-d) (plot avg controllability vs. functional effect; calculate structural effect and plot vs avg/modal controllability)
   
  \item
-  Replicate Figure 5 a)-d)
-  
- \item
-  Replicate Figure 6 (?)
+  Replicate Figure 6 (?) (calculate fractional activation and plot against functional/structural effect; plot fraction activation FCs for node 25 and 70)
 \end{itemize}
 
 I don't think we need to replicate Figure 7 (Structure-function landscape)
+
+
+
 
 \subsection{Reimplementation}
 
