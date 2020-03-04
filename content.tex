@@ -60,8 +60,9 @@ First, for weak input the FHN resides in a stable fixed point with low activity.
 regime and, last, for even stronger inputs it then settles into a stable fixed point again, however, this time with a very high activity.
 
 \begin{figure}
-\includegraphics{Figures/placeholder}
- \caption{ 3 states of the FitzHugh Nagumo (and comparison to the Wilson-Cowan?) \textbf{\textit{Nico!}}}
+\includegraphics[width=\textwidth]{Figures/FHN_dynamics}
+ \caption{ 3 states of the FitzHugh Nagumo model. Analguous to the Wilson-Cowan model, depending on the strength of the external input, the FitzHugh Nagumo
+ model displays either a low fixed point state (left panel), a sustained oscillation (middle panel), or a high activity fixed point (right panel).}
  \label{fig:FHN}
 \end{figure}
 
@@ -69,8 +70,6 @@ regime and, last, for even stronger inputs it then settles into a stable fixed p
 \paragraph{Individual oscillatory transition paramters}
 \textbf{\textit{Nico!}}
 
-%\paragraph{Inter- and intra-subject reproducibility and variability}
-%\textit{depends on whether we have repeated scans of same individuals or not}
 
 
 \paragraph{Linear network control theory}
@@ -92,8 +91,10 @@ is applied, i.e. the external input parameter of a single node $i$ is set to $I_
 
 
 \paragraph{Regional controllability}
-
-
+Replicating the findings of Muldoon et al. \supercite{Muldoon2016}, we see that average and modal controllability strongly correlate with node degree for our
+data set of structural connectivity matrices. While average 
+controllability and degree are positively related(\ref{fig:controllability-measures} (a)), modal controllability typically decreases with increasing node degree 
+(\ref{fig:controllability-measures} (b)).
 
 \begin{figure}
 \subfigure[]{
@@ -105,6 +106,14 @@ is applied, i.e. the external input parameter of a single node $i$ is set to $I_
  \label{fig:controllability-measures}
 \end{figure}
 
+Using these structural connectivity matrices, we then simulated the effect of electrical stimulation on changes in the global network dynamics. We followed the 
+simulation protocol from the original article \supercite{Muldoon2016}: We first chose the global coupling strength such that all regional nodes are just below the 
+transition from the low fixed point to the oscillatory regime. Then, a single region is chosen and an external current is applied to this region such that this
+region transitions to the oscillatory regime. By calculating the functional connectivity matrix (the matrix containing the pairwise correlations between regions) 
+for the model before and after stimulation and substracting the former from the latter, we can measure the functional effect of this particular stimulation. Again, 
+replicating the original findings, we find that regions with low average controllability led to small changes in functional connectivity (an example can be seen
+in \ref{fig:functional-effect-examples} (a)) while regions with high average controllability led to larger changes in functional connectivity 
+\ref{fig:functional-effect-examples} (b)).
 
 \begin{figure}
 \subfigure[]{
@@ -117,6 +126,7 @@ is applied, i.e. the external input parameter of a single node $i$ is set to $I_
 \end{figure}
 
 
+
 \begin{figure}
 \subfigure[]{
 \includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
@@ -127,8 +137,8 @@ is applied, i.e. the external input parameter of a single node $i$ is set to $I_
 \subfigure[]{
 \includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
  \caption{\textbf{Functional effect and controllability.} (a-b) Functional effect of nodal stimulation plotted against average (a) and modal (b) controllability.
- \textit{replicates Figure 5; change b-d; redo all figures with individual subject resolution }\textbf{\textit{Question: Why do we have modal controllability 
- ranging from 0.4 to 1 while Muldoon from 0.965 to 1?}}} 
+ \textit{replicates Figure 5; change b-d; redo all figures with individual subject resolution }\textbf{\textit{Questions: Why do we have modal controllability 
+ ranging from 0.4 to 1 while Muldoon from 0.965 to 1; compare to Figure 2???? Why is our functional higher than theirs ([0.6-0.9] compared to [0-0.8]?}}} 
  \label{fig:controllability-functional-effect}
 \end{figure}
 
@@ -146,7 +156,7 @@ is applied, i.e. the external input parameter of a single node $i$ is set to $I_
   Replicate Figure 6 (?) (calculate fractional activation and plot against functional/structural effect; plot fraction activation FCs for node 25 and 70)
 \end{itemize}
 
-I don't think we need to replicate Figure 7 (Structure-function landscape)
+
 
 
 
