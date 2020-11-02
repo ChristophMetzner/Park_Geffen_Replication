@@ -1,172 +1,68 @@
 \subsection{Introduction}
 
 
-Transcranial electrical and magnetic stimulation  (TES and TMS, respectively) have been increasingly used in studies over the last decades and have been found to
-alter and enhance cognitive processes
-\supercite{Walsh2000,Lage2016,Paulus2016}. Furthermore, deep brain stimulation (DBS) has shown remarkable results in the treatment of tremor symptoms in 
-Parkinsons disease \supercite{Collomb-Clerc2015} and also great potential 
-in the treatment of psychiatric disorder such as obsessive-compulsive disorder \supercite{Alonso2015}.
-However, despite this growing success in clinical settings, a principled understanding of the effects of stimulation on the dynamical processes in the brain 
-is still lacking and, hence, stimulation parameters and target areas are currently not being optimized in a systematic fashion.    
+bla
 
-Therefore, Muldoon et al. \supercite{Muldoon2016} develop a framework to explore the effects of targeted transcranial or deep brain stimulation on overall 
-brain dynamics. In their framework they use data-driven computational model based on subject-specific structural connectivity and a nonlinear model of regional
-brain activity (the so-called Wilson-Cowan model \supercite{Wilson1972}). Furthermore, they demonstrate that structure-based measures from linear network control theory 
-can predict the functional effect of targeted stimulation.
 
-In this work, we present an implementation of the modelling framework from Muldoon et al. \supercite{Muldoon2016} writtem im pure Python, where we exchanged
-the model of regional brain activity to a simpler, phenomenological model, the FitzHugh Nagumo model \supercite{FitzHugh1961}. We report a \textit{partial/full(?)} 
-replication of their results.
 \subsection{Methods}
+In this replication, we focus on the rate models proposed in the original article.
+The firing rate model was an extensions of the traditional Wilson-Cowan model \supercite{Wilson1972} and represented
+an iso-frequency unit of the auditory cortex. This iso-frequency unit consisted of one excitatory and two inhibitory populations.
+Building on this unit a more complex three-unit rate models was developed, to investigate stimulus-specific adaptation, forward suppression,
+tunig-curve adaptation and feedforward functional connectivity. 
 
-\paragraph{Overview}
-The original model is, to the best of our knowledge, not publicly available. Therefore, this reimplementation is purely based on the description in the original
-article and its supplementary material. The reimplementation is written in Python (2.7/3.6? tested with the other?). 
+\paragraph{Iso-Frequency Unit Model}
 
-We have made two major changes compared to the original article: First, because we did not have access to the DTI data set used in the article, we used publicly
-available DTI data form the Human Connectome Project \supercite{}. Second, we replaced the Wilson-Cowan model \supercite{Wilson1972} by the simpler and 
-more efficient FithHugh Nagumo model \supercite{FitzHugh1961}. Both changes will be explained in more detail in the following sections and commented on in the 
-discussion.
-\paragraph{Structural connectivity}
-As explained above, we did not have access to the diffusion tensor imaging (DTI) data form the original article. We thus used DTI data from 10 healthy
-subjects (mean+std age and gender distribution; possibly even more demographic info \textbf{\textit{Nico!}}) from the publicly available HCP1200 data set of the
-Human Connectome Project (\textit{link}).
+\paragraph{Three-Unit Model}
 
-\begin{itemize}
- \item 
-  Acquisition information from HCP
- \item
-  Preprocessing: software tool, steps and parameters  \textbf{\textit{Nico! Maybe Cristiana?}}
- \item
-  Structural connectivity matrices: Parcellation scheme, thresholding, normalization \textbf{\textit{Nico!}}
-\end{itemize}
-
-\textit{Do we have repeated scans of the same individuals? If not, we cannot look at Reproducibility and the within subject
-variability (see Figure 2 d). Not a big problem, but should then be mentioned here!}
-
-\paragraph{Model of regional brain dynamics}
-The second part that is necessary to model the dynamic evolution of brain activity across the entire brain, is a computational model of the
-regional brain dynamics. In the original article, Muldoon et al. \supercite{Muldoon2016} use the Wilson-Cowan model \supercite{Wilson1972}. The Wilson-Cowan model
-describes the interaction between a local excitatory and a local inhibitory neural population by two coupled differential equations. However, due to the different
-parameters describing the coupling of the populations and the synaptic interactions, the Wilson-Cowan model has more then ten free parameters and, thus,
-a high degree of unconstrained variability. Therefore, we opted to exchange the Wilson-Cowan model by the FitzHugh Nagumo (FHN) model \supercite{FitzHugh1961}, which
-only has six (\textit{correct?}\textbf{\textit{Nico!}}) free parameters and, additionally, is computationally slightly more efficient than the Wilson-Cowan model.
-
-The FHN is given by...\textit{  FHN equations and parameters (plus explanation)} \textbf{\textit{Nico!}}
-
-
-Importantly, the FHN model displays the same three dynamical states depending on the strength of its input than the Wilson-Cowan model (see Figure \ref{fig:FHN}): 
-First, for weak input the FHN resides in a stable fixed point with low activity. Second, for stronger inputs the FHN then transitions into an oscillatory
-regime and, last, for even stronger inputs it then settles into a stable fixed point again, however, this time with a very high activity.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{Figures/FHN_dynamics}
- \caption{ 3 states of the FitzHugh Nagumo model. Analguous to the Wilson-Cowan model, depending on the strength of the external input, the FitzHugh Nagumo
- model displays either a low fixed point state (left panel), a sustained oscillation (middle panel), or a high activity fixed point (right panel).}
- \label{fig:FHN}
-\end{figure}
-
-
-\paragraph{Individual oscillatory transition paramters}
-\textbf{\textit{Nico!}}
-
-
-
-\paragraph{Linear network control theory}
-Muldoon et al. \supercite{Muldoon2016} utilize the control theoretic notion of controllability to get theoretical insight inot the effect stimulation might have.
-They choose two different measures based on a linear control setting: \textit{average controllability} and \textit{modal controllability}. Average controllability 
-is given by the average input energy to the control nodes over all possible target states. Typically, nodes with high average controllability can control networks 
-dynamics over nearby target states in an energy efficient way. On the other modal controllability decribes how well a node can control all network modes. High modal 
-controllability means that such a node is able to reach all modes of a network and, thus, can force the dynamics into hard-to-reach target states.
-
-\paragraph{Functional and structural effect, and fractional activation}
-We calculate functional connectivity matrices as pairwise cross-correlation between the $x_1$ components of the FHN model of each node. Throughout, we 
-use a 1s time window. As in the original article, the stimulation trials consist of three phases each comprising 1s: the first phase, without any external input, 
-allows the model to stabilise its activity, the second phase, again without external input, is used as a baseline and, lastly, in the third phase the stimulation
-is applied, i.e. the external input parameter of a single node $i$ is set to $I_i(t)=0.52?$ \textbf{\textit{Nico}} while all others remain 0. 
 
 \subsection{Reproduction of experiments}
 
 
-
-
-\paragraph{Regional controllability}
-Replicating the findings of Muldoon et al. \supercite{Muldoon2016}, we see that average and modal controllability strongly correlate with node degree for our
-data set of structural connectivity matrices. While average 
-controllability and degree are positively related(\ref{fig:controllability-measures} (a)), modal controllability typically decreases with increasing node degree 
-(\ref{fig:controllability-measures} (b)).
-
 \begin{figure}
-\subfigure[]{
-\includegraphics[width=\textwidth]{Figures/average_controllability}}
-\subfigure[]{
-\includegraphics[width=\textwidth]{Figures/modal_controllability}}
- \caption{\textbf{Regional controllability.} (a) Relationship between node degree  and (a) average controllability and (b) modal controllability, respectively, 
- for all regions and subjects.\textit{replicates Figure 3}} 
- \label{fig:controllability-measures}
+ \includegraphics[width=\textwidth]{Figures/Fig1}
+ \caption{ReFig1}
 \end{figure}
 
-Using these structural connectivity matrices, we then simulated the effect of electrical stimulation on changes in the global network dynamics. We followed the 
-simulation protocol from the original article \supercite{Muldoon2016}: We first chose the global coupling strength such that all regional nodes are just below the 
-transition from the low fixed point to the oscillatory regime. Then, a single region is chosen and an external current is applied to this region such that this
-region transitions to the oscillatory regime. By calculating the functional connectivity matrix (the matrix containing the pairwise correlations between regions) 
-for the model before and after stimulation and substracting the former from the latter, we can measure the functional effect of this particular stimulation. Again, 
-replicating the original findings, we find that regions with low average controllability led to small changes in functional connectivity (an example can be seen
-in \ref{fig:functional-effect-examples} (a)) while regions with high average controllability led to larger changes in functional connectivity 
-\ref{fig:functional-effect-examples} (b)).
-
 \begin{figure}
-\subfigure[]{
-\includegraphics[width=0.8\textwidth]{Figures/DeltaFC25}}
-\subfigure[]{
-\includegraphics[width=0.8\textwidth]{Figures/DeltaFC70}}
- \caption{\textbf{Effect of regional stimulation.} Effect of stimulation of two example regions: (a) Region 25 (name?) with a low average controllability (value?),
- (b) Region 70 (name?) with a high average controllability (value?). \textit{replicates Figure 4c}} 
- \label{fig:functional-effect-examples}
+ \includegraphics[width=\textwidth]{Figures/Fig2}
+ \caption{ReFig2}
 \end{figure}
 
-
-
 \begin{figure}
-\subfigure[]{
-\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
-\subfigure[]{
-\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}\\
-\subfigure[]{
-\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
-\subfigure[]{
-\includegraphics[width=0.4\textwidth]{Figures/functional_effect_modal}}
- \caption{\textbf{Functional effect and controllability.} (a-b) Functional effect of nodal stimulation plotted against average (a) and modal (b) controllability.
- \textit{replicates Figure 5; change b-d; redo all figures with individual subject resolution }\textbf{\textit{Questions: Why do we have modal controllability 
- ranging from 0.4 to 1 while Muldoon from 0.965 to 1; compare to Figure 2???? Why is our functional higher than theirs ([0.6-0.9] compared to [0-0.8]?}}} 
- \label{fig:controllability-functional-effect}
+ 
+ \includegraphics[width=\textwidth]{Figures/Fig3B}
+ \includegraphics[width=\textwidth]{Figures/Fig3C}
+ \caption{ReFig3}
 \end{figure}
 
+\begin{figure}
+ \includegraphics[width=\textwidth]{Figures/Fig4A}
+ \includegraphics[width=\textwidth]{Figures/Fig4BDE}
+ \includegraphics[width=\textwidth]{Figures/Fig4F}
+ \caption{ReFig4}
+\end{figure}
 
+\begin{figure}
+ \includegraphics[width=\textwidth]{Figures/Fig6BC}
+ \includegraphics[width=\textwidth]{Figures/Fig6DE}
+ \caption{ReFig6}
+\end{figure}
 
-\begin{itemize}
- \item 
-  Replicate Figure 2 (c) and (d) 
-  and for c) our box plots for all subjects, and d) bar plots with our data
-  
- \item
-  Replicate Figure 5 b)-d) (plot avg controllability vs. functional effect; calculate structural effect and plot vs avg/modal controllability)
-  
- \item
-  Replicate Figure 6 (?) (calculate fractional activation and plot against functional/structural effect; plot fraction activation FCs for node 25 and 70)
-\end{itemize}
+\begin{figure}
+ \includegraphics[width=\textwidth]{Figures/Fig8BD}
+ \caption{ReFig8}
+\end{figure}
 
-
-
-
+\begin{figure}
+ \includegraphics[width=\textwidth]{Figures/Fig9}
+ \caption{ReFig9}
+\end{figure}
 
 
 \subsection{Reimplementation}
+The iso-frequency unit model and the three-unit model were both implemented in Python and integrated into the neurolib framework \supercite{Cakan2019}.
 
-\begin{itemize}
- \item 
-  Details on the new implementation (packages/dependencies, other stuff?, maybe just a paragraph in the methods section) 
-\end{itemize}
 
  
 
@@ -174,8 +70,5 @@ in \ref{fig:functional-effect-examples} (a)) while regions with high average con
 
 
 \subsection{Discussion}
+bla
 
-\begin{itemize}
- \item 
-  Main similarities and differences between our and original results. Replication: full, partial or not at all?
-\end{itemize}

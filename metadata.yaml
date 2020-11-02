@@ -5,35 +5,16 @@
 #  - For a successful replication, it shoudl be prefixed with "[Re]"
 #  - For a failed replication, it should be prefixed with "[¬Re]"
 #  - For other article types, no instruction (but please, not too long)
-title: "[Re] Stimulation-Based Control of Dynamic Brain Networks"
+title: "[Re] A circuit model of auditory cortex"
 
 # List of authors with name, orcid number, email and affiliation
 # Affiliation "*" means contact author
 authors:
-  - name: Nicolas Roth
+  - name: Parvathy Neelakandan
     orcid: 
-    email: roth@tu-berlin.de
-    affiliations: 1,*
-
-  - name: Teresa Chouzouris
-    orcid: 
-    email: t.chouzouris@tu-berlin.de
+    email: parvathy.neelakandan@bccn-berlin.de
     affiliations: 1
 
-  - name: Cristiana Dimulescu
-    orcid: 
-    email: dimulescu@tu-berlin.de
-    affiliations: 1
-
-  - name: Caglar Cakan
-    orcid: 
-    email: cakan@tu-berlin.de
-    affiliations: 1
-
-  - name: Klaus Obermayer
-    orcid: 
-    email: oby@ni.tu-berlin.de
-    affiliations: 1
 
   - name: Christoph Metzner
     orcid: 0000-0002-5933-2101
@@ -56,13 +37,13 @@ affiliations:
 
 
 # List of keywords (adding the programming language might be a good idea)
-keywords: stimulation, brain dynamics, network control, python
+keywords: stimulus specific adaptation, interneurons, auditory system, python
 
 # Code URL and DOI (url is mandatory for replication, doi after acceptance)
 # You can get a DOI for your code from Zenodo,
 #   see https://guides.github.com/activities/citable-code/
 code:
-  - url: https://github.com/ChristophMetzner/Muldoon-Replication
+  - url: https://github.com/ChristophMetzner/Park-Geffen-Replication
   - doi: 
 
 # Date URL and DOI (optional if no data)
