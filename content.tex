@@ -47,6 +47,7 @@ is subdivided into the 'raw' input $i(t)$ and a slow modulation $g(t)$ mimicking
 is simply an instantaneous rise with amplitude $q$ and an exponential decay with a time constant of $\tau_q$. The synaptic depression $g(t)$ is 
 governed by the following equation
 \begin{equation}
+\label{eq:input_depression}
  \frac{dg(t)}{dt} = \frac{g_0-g(t)}{\tau_{d_1}} - \frac{g(t)i(t)}{\tau_{d_2}}.
 \end{equation}
 
@@ -112,6 +113,28 @@ Here, $I_i(t)$ is described by
 and
 \begin{equation}
  I_2(t) = (g_1(t)i_1(t) + g_3(t)i_3(t))\alpha + g_2(t)i_2(t).
+\end{equation}
+Here, $i_k(t)$ represents thalamic inputs to each of the three units. Taken together, the description of the three-unit model is the same than 
+for the single-unit model, except for the addition of lateral inter-unit connectivity and short-term synaptic dynamics. Short-term facilitation 
+is modelled by $F_i(t)$ and increases from 0 to positive values whereas depression is modelled by $D_i(t)$, whic decreases from 1 towards 0. 
+Facilitating synapses were added to Exc to SST inputs and depressing terms to PV to Exc synapses (see \supercite{beierlein2003two}). The facilitating
+term $F_j(t)$ obeys
+\begin{equation}
+ \frac{dF_j(t)}{dt} = -\frac{F_j(t)}{\tau_{D_1}} + \frac{i_j(t)}{\tau_{D_2}},
+\end{equation}
+where $\tau_{D_1}$ and $\tau_{D_2}$ are again the depression time constants from the input functions of the single-unit model given in 
+Equation \ref{eq:input_depression}. Analoguously, the depression term $D_j(t)$ follows
+\begin{equation}
+ \frac{dD_j(t)}{dt} = \frac{1-D_j(t)}{\tau_{D_1}} - \frac{D_j(t)i_j(t)}{\tau_{D_2}}.
+\end{equation}
+The choices for the parameters can again be found in Table \ref{tab:params} and were based on experimental studies \supercite{tsodyks1997paradoxical,
+abbott1997synaptic,wehr2005synaptic}. 
+
+Park and Geffen note that, when matching model behaviour to experimental findings, two distinct parameter sets emerged and a unified rate model 
+description required a paradigm-dependent baseline inhibition, which reflected high thalamic activity (corresponding to weak baseline inhibition)
+versus low thalamic activity (corresponding to strong baseline inhibition). This was implemented using another variable $\bar{F}$ governed by
+\begin{equation}
+  \frac{d\bar{F}(t)}{dt} = \frac{\bar{F}^2(t)}{\tau_{F_1}} - \frac{\bar{I}(t)}{\tau_{F_2}}.
 \end{equation}
 
 
