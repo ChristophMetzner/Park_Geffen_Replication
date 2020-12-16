@@ -150,10 +150,11 @@ The iso-frequency unit model and the three-unit model were both implemented in P
 \subsection{Reproduction of experiments}
 
 
-Figure \ref{fig:figure1B} compares the input and response profile for the original model and the reproduction. Qualitatively both models 
+Figure \ref{fig:figure1B} compares the input and response profile for the original and the reproduced single-unit model. Qualitatively both models 
 behave similarly, however, quantitative differences can be seen. The thalamic input in the reproduced model only reaches an amplitude of 
 $\approx 1.4$ while the original model reaches $\approx 4-5$. Increasing the amplitude of the input (in the reproduced model) did change the 
-qualitative behaviour. \textbf{ToDo: add subplots with changes to the input amplitude; describe the results for the changes}
+qualitative behaviour. \textbf{ToDo: add subplots with changes to the input amplitude; describe the results for the changes; change colours to match
+original.}
 
 \begin{figure}
 \subfigure[original]{
@@ -164,11 +165,22 @@ qualitative behaviour. \textbf{ToDo: add subplots with changes to the input ampl
  \label{fig:figure1B}
 \end{figure}
 
+Figure \ref{fig:figure2C} compares the input and response profile for the original and the reproduced three-unit model. 
+Here, we see that the first panel ($\mu_1$ activity) qualitatively matches, however, the amplitude of the response to the stimulation of $f^*$ is too high.
+For the second panel ($\mu_2$ activity), the activity in response to $f_1$ and $f_2$ is too high, almost as high as to the preferred frequency $f^*$.
+The same pattern can be observed for the third panel ($\mu_3$ activity), where the response to $f^*$ is too high.
+However, we can see that the input profile for the three units, original and reproduced model, looks almmost identical to the 
+profile from the reproduced single-unit model (Figure \ref{fig:figure1B} b). \textbf{ToDo: inlcude g in the plots, see Figure 2C-E;}
 
 \begin{figure}
- \includegraphics[width=\textwidth]{Figures/Fig2}
- \caption{ReFig2}
+\subfigure[original]{
+ \includegraphics[width=\textwidth]{Figures/Original_Paper/Fig2C-F}}
+\subfigure[replication]{
+ \includegraphics[width=\textwidth]{Figures/New_15_12_20/Fig2C-F}}
+ \caption{Replicates Figure 2C-F.}
+ \label{fig:figure2C}
 \end{figure}
+
 
 \begin{figure}
  
@@ -176,6 +188,11 @@ qualitative behaviour. \textbf{ToDo: add subplots with changes to the input ampl
  \includegraphics[width=\textwidth]{Figures/Fig3C}
  \caption{ReFig3}
 \end{figure}
+
+
+
+
+
 
 \begin{figure}
  \includegraphics[width=\textwidth]{Figures/Fig4A}
